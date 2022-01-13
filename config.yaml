@@ -5,7 +5,7 @@ metadata:
   labels:
     app: emailservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: emailservice
@@ -16,12 +16,31 @@ spec:
     spec:
       containers:
       - name: emailservice
-        image: gcr.io/google-samples/microservices-demo/emailservice
+        image: gcr.io/google-samples/microservices-demo/emailservice:v0.3.5
         ports:
         - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +62,7 @@ metadata:
   labels:
     app: recommendationservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: recommendationservice
@@ -54,7 +73,7 @@ spec:
     spec:
       containers:
       - name: recommendationservice
-        image: gcr.io/google-samples/microservices-demo/recommendationservice
+        image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.3.5
         ports:
         - containerPort: 8080
         env:
@@ -62,6 +81,27 @@ spec:
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:3550"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        - name: DISABLE_DEBUGGER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 220Mi
+          limits:
+            cpu: 200m
+            memory: 450Mi
 ---
 apiVersion: v1
 kind: Service
@@ -83,7 +123,7 @@ metadata:
   labels:
     app: productcatalogservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: productcatalogservice
@@ -94,12 +134,33 @@ spec:
     spec:
       containers:
       - name: productcatalogservice
-        image: gcr.io/google-samples/microservices-demo/productcatalogservice
+        image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.3.5
         ports:
         - containerPort: 3550
         env:
         - name: PORT
           value: "3550"
+        - name: DISABLE_STATS
+          value: "1"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -121,7 +182,7 @@ metadata:
   labels:
     app: paymentservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: paymentservice
@@ -132,12 +193,33 @@ spec:
     spec:
       containers:
       - name: paymentservice
-        image: gcr.io/google-samples/microservices-demo/paymentservice
+        image: gcr.io/google-samples/microservices-demo/paymentservice:v0.3.5
         ports:
         - containerPort: 50051
         env:
         - name: PORT
           value: "50051"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        - name: DISABLE_DEBUGGER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -159,7 +241,7 @@ metadata:
   labels:
     app: currencyservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: currencyservice
@@ -170,12 +252,33 @@ spec:
     spec:
       containers:
       - name: currencyservice
-        image: gcr.io/google-samples/microservices-demo/currencyservice
+        image: gcr.io/google-samples/microservices-demo/currencyservice:v0.3.5
         ports:
         - containerPort: 7000
         env:
         - name: PORT
           value: "7000"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        - name: DISABLE_DEBUGGER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -197,7 +300,7 @@ metadata:
   labels:
     app: shippingservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: shippingservice
@@ -208,12 +311,33 @@ spec:
     spec:
       containers:
       - name: shippingservice
-        image: gcr.io/google-samples/microservices-demo/shippingservice
+        image: gcr.io/google-samples/microservices-demo/shippingservice:v0.3.5
         ports:
         - containerPort: 50051
         env:
         - name: PORT
           value: "50051"
+        - name: DISABLE_STATS
+          value: "1"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -235,7 +359,7 @@ metadata:
   labels:
     app: adservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: adservice
@@ -252,6 +376,25 @@ spec:
         env:
         - name: PORT
           value: "9555"
+        - name: DISABLE_STATS
+          value: "1"
+        - name: DISABLE_TRACING
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        resources:
+          requests:
+            cpu: 200m
+            memory: 180Mi
+          limits:
+            cpu: 300m
+            memory: 300Mi
 ---
 apiVersion: v1
 kind: Service
@@ -273,7 +416,7 @@ metadata:
   labels:
     app: cartservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: cartservice
@@ -284,12 +427,28 @@ spec:
     spec:
       containers:
       - name: cartservice
-        image: gcr.io/google-samples/microservices-demo/cartservice
+        image: gcr.io/google-samples/microservices-demo/cartservice:v0.3.5
         ports:
         - containerPort: 7070
         env:
         - name: REDIS_ADDR
           value: "redis-cart:6379"
+        readinessProbe:
+          initialDelaySeconds: 15
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+        resources:
+          requests:
+            cpu: 200m
+            memory: 64Mi
+          limits:
+            cpu: 300m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -311,7 +470,7 @@ metadata:
   labels:
     app: redis-cart
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: redis-cart
@@ -325,6 +484,21 @@ spec:
         image: redis:alpine
         ports:
         - containerPort: 6379
+        readinessProbe:
+          periodSeconds: 5
+          tcpSocket:
+            port: 6379
+        livenessProbe:
+          periodSeconds: 5
+          tcpSocket:
+            port: 6379
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: 125m
+          requests:
+            cpu: 70m
+            memory: 200Mi
         volumeMounts:
         - mountPath: /data
           name: redis-data
@@ -352,7 +526,7 @@ metadata:
   labels:
     app: checkoutservice
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: checkoutservice
@@ -363,7 +537,7 @@ spec:
     spec:
       containers:
       - name: checkoutservice
-        image: gcr.io/google-samples/microservices-demo/checkoutservice
+        image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.3.5
         ports:
         - containerPort: 5050
         env:
@@ -381,6 +555,27 @@ spec:
           value: "currencyservice:7000"
         - name: CART_SERVICE_ADDR
           value: "cartservice:7070"
+        - name: DISABLE_STATS
+          value: "1"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:5050"]
+        livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:5050"]
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
@@ -402,7 +597,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -413,7 +608,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/google-samples/microservices-demo/frontend
+        image: gcr.io/google-samples/microservices-demo/frontend:v0.3.5
         ports:
         - containerPort: 8080
         env:
@@ -433,6 +628,33 @@ spec:
           value: "checkoutservice:5050"
         - name: AD_SERVICE_ADDR
           value: "adservice:9555"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
+        readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/_healthz"
+              port: 8080
+              httpHeaders:
+              - name: "Cookie"
+                value: "shop_session-id=x-readiness-probe"
+        livenessProbe:
+          initialDelaySeconds: 10
+          httpGet:
+            path: "/_healthz"
+            port: 8080
+            httpHeaders:
+            - name: "Cookie"
+              value: "shop_session-id=x-liveness-probe"
+        resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
