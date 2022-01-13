@@ -5,7 +5,7 @@ metadata:
   labels:
     app: emailservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: emailservice
@@ -62,7 +62,7 @@ metadata:
   labels:
     app: recommendationservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: recommendationservice
@@ -123,7 +123,7 @@ metadata:
   labels:
     app: productcatalogservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: productcatalogservice
@@ -182,7 +182,7 @@ metadata:
   labels:
     app: paymentservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: paymentservice
@@ -241,7 +241,7 @@ metadata:
   labels:
     app: currencyservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: currencyservice
@@ -300,7 +300,7 @@ metadata:
   labels:
     app: shippingservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: shippingservice
@@ -359,7 +359,7 @@ metadata:
   labels:
     app: adservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: adservice
@@ -376,18 +376,18 @@ spec:
         env:
         - name: PORT
           value: "9555"
-        - name: DISABLE_STATS
-          value: "1"
-        - name: DISABLE_TRACING
-          value: "1"
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        #- name: DISABLE_STATS
+        #  value: "1"
+        #- name: DISABLE_TRACING
+        #  value: "1"
+        #readinessProbe:
+        #  periodSeconds: 5
+        #  exec:
+        #    command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        #livenessProbe:
+        #  periodSeconds: 5
+        #  exec:
+        #    command: ["/bin/grpc_health_probe", "-addr=:9555"]
         resources:
           requests:
             cpu: 200m
@@ -416,7 +416,7 @@ metadata:
   labels:
     app: cartservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: cartservice
@@ -470,7 +470,7 @@ metadata:
   labels:
     app: redis-cart
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: redis-cart
@@ -526,7 +526,7 @@ metadata:
   labels:
     app: checkoutservice
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: checkoutservice
@@ -597,7 +597,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
