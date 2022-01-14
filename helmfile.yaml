@@ -1,0 +1,68 @@
+releases:
+- name: redis-cart
+  chart: charts/redis-cart
+  values: 
+    - values/redis-cart-values.yaml
+    - appNS: google-microservices-demo
+
+- name: emailservice
+  chart: charts/microservice
+  values: 
+    - values/emailservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: recommendationservice
+  chart: charts/microservice
+  values: 
+    - values/recommendationservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: productcatalogservice
+  chart: charts/microservice
+  values: 
+    - values/productcatalogservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: paymentservice
+  chart: charts/microservice
+  values: 
+    - values/paymentservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: currencyservice
+  chart: charts/microservice
+  values: 
+    - values/currencyservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: shippingservice
+  chart: charts/microservice
+  values: 
+    - values/shippingservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: adservice
+  chart: charts/microservice
+  values: 
+    - values/adservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: cartservice
+  chart: charts/microservice
+  values: 
+    - values/cartservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: checkoutservice
+  chart: charts/microservice
+  values: 
+    - values/checkoutservice-values.yaml
+    - appNS: google-microservices-demo
+
+- name: frontend
+  chart: charts/microservice
+  values: 
+    - values/frontend-values.yaml
+    - appNS: google-microservices-demo
+    - serviceType: LoadBalancer
+    - servicePort: 8088

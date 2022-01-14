@@ -34,3 +34,10 @@ spec:
   - protocol: TCP
     port: xxx_port
     targetPort: xxx_port
+
+---
+- name: servicename
+  chart: charts/microservice
+  values: 
+    - values/servicename-values.yaml
+    - appNS: google-microservices-demo

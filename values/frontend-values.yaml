@@ -3,9 +3,9 @@ appReplicasNumber: 1
 appImage: gcr.io/google-samples/microservices-demo/frontend
 appVersion: latest
 containerPort: 8080
-serviceType: LoadBalancer
+serviceType: ClusterIP
 serviceProtocol: TCP
-servicePort: 8089
+servicePort: 80
 containerEnvVars:
   - name: PORT
     value: 8080
