@@ -19,8 +19,9 @@ spec:
         image: "{{ .Values.appImage }}:{{ .Values.appVersion }}"
         ports:
         - containerPort: {{ .Values.containerPort }}
-        env:
-        {{- range .Values.containerEnvVars}}
-        - name: {{ .name }}
-          value: {{ .value | quote }}
-        {{- end}}
+        volumeMounts:
+        - mountPath: {{ .Values.redisMountPath }}
+          name: {{ .Values.volumeName }}
+      volumes:
+      - name: {{ .Values.volumeName }}
+        emptyDir: {}

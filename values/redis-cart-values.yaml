@@ -1,0 +1,10 @@
+appName: redis-cart
+appReplicasNumber: 1
+appImage: redis
+appVersion: alpine
+containerPort: 6379
+serviceType: ClusterIP
+serviceProtocol: TCP
+servicePort: 6379
+redisMountPath: /data
+volumeName: redis-data
