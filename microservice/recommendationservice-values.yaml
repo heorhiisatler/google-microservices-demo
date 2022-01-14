@@ -1,0 +1,13 @@
+appName: recommendationservice
+appReplicasNumber: 1
+appImage: gcr.io/google-samples/microservices-demo/recommendationservice
+appVersion: latest
+containerPort: 8080
+serviceType: ClusterIP
+serviceProtocol: TCP
+servicePort: 5000
+containerEnvVars:
+  - name: PORT
+    value: "8080"
+  - name: PRODUCT_CATALOG_SERVICE_ADDR
+    value: "productcatalogservice:3550"

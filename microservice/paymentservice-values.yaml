@@ -1,0 +1,11 @@
+appName: paymentservice
+appReplicasNumber: 1
+appImage: gcr.io/google-samples/microservices-demo/paymentservice
+appVersion: latest
+containerPort: 50051
+serviceType: ClusterIP
+serviceProtocol: TCP
+servicePort: 50051
+containerEnvVars:
+  - name: PORT
+    value: 50051
